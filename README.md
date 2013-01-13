@@ -29,7 +29,7 @@ I assume you have read and have a good understanding of all that is covered in [
 
 ## Installation
 
-npm module to be published shortly.
+```npm install node-google-prediction```
 
 ## Usage
 
