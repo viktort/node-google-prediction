@@ -14,14 +14,18 @@ module.exports = {
   //aud value is always the same
   JWT_CLAIM_SET_AUD: "https://accounts.google.com/o/oauth2/token",
   GRANT_TYPE: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+  MODEL_INSERT_DEFAULT_FIELDS: 'id,trainingComplete,trainingStatus,trainingInstances,created,selfLink',
+  MODEL_INSERT_FIELDS: "",
 
   // ---------------------------- For testing purposes only ------------------------------------ //
 
   //This is the email address belonging to the service account - place in here for tests to run
-  test_jwt_claim_set_iss: "471875788466@developer.gserviceaccount.com",
+  test_jwt_claim_set_iss: "",
   //This is absolute path to your .pem file
-  test_pem_file: "sdfsdfs",
-  test_modelID: "dfdsfds",
-  test_storage_data_location: "",
-  test_predict_request: ""
+  test_pem_file: "",
+  test_modelID: "",
+  test_predict_request: {
+      //Key value pair to create the request body
+  },
+  test_storage_data_location: ""
 }

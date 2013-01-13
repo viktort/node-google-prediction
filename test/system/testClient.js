@@ -57,7 +57,35 @@ TestClient.prototype.predict = function(options) {
     }
     console.log(data);
     assert.ok(data.id = config.test_modelID);
-    self.revokeToken({token: options.token});
+
+    // Ideally you will not run this every time you run tests as this will retrain the model and this can take some time to complete.
+    // You can still query a trained model as the data is being trained!
+    if(config.test_storage_data_location != '') {
+      self.insert({id: options.id, token: options.token, storageDataLocation: config.test_storage_data_location});
+    } else {
+      self.revokeToken({token: options.token});
+    }
+  });
+}
+
+TestClient.prototype.insert = function(options) {
+  var self = this;
+  client.insert(options, function(err, data, response) {
+    if(err) {
+      throw new Error(err);
+    }
+    console.log(data);
+    delete options.storageDataLocation;
+    client.get(options, function(err, data, response) {
+      if(err) {
+        throw new Error(err);
+      }
+      console.log('training status =', data);
+      console.log('\n++++++++++++++++++++++++++++++++\n');
+      console.log('Training status for model id', options.id, ':', data.trainingStatus,'\n');
+      assert.ok(data.trainingStatus == 'RUNNING');
+      self.revokeToken({token: options.token});
+    });
   });
 }
 
