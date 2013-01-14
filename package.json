@@ -8,7 +8,7 @@
     "name": "node-google-prediction",
     "description": "Node client for Google Prediction API",
     "homepage": "https://github.com/viktort/node-google-prediction",
-    "version": "0.0.2-beta",
+    "version": "0.0.3-beta",
     "repository": {
         "url": ""
     },
@@ -20,7 +20,6 @@
         "node": "*"
     },
     "dependencies": {
-        "express": "3.0.5",
         "require-all": "0.0.5",
         "feather": "0.0.6",
         "moment": "1.3.0",
