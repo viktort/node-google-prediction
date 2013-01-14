@@ -59,6 +59,15 @@ I assume you have read and have a good understanding of all that is covered in [
 Due to the nature of the Google Prediction API, in order to run tests you will need to provide some details withing
 config/config.js. This is so you can provide your own Service Account details and test your own trained models.
 
+##Creating you .pem file
+**Note:** That when creating a Service Account via the Google Console you will be given a .pk12 file. This library works
+by passing in a .pem file so you can convert it using openssl by running the following command
+
+```sh
+    openssl pkcs12 -in originalKey.p12 -out convertedKey.pem -nodes -clcerts
+```
+The result will be the key and certificate. You can keep it in one file or split it into two separate files.
+
 ## Done & TODOs
 Implemented so far:
 * get Access Token
