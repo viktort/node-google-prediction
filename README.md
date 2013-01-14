@@ -57,3 +57,17 @@ I assume you have read and have a good understanding of all that is covered in [
 ## Running tests
 Due to the nature of the Google Prediction API, in order to run tests you will need to provide some details withing
 config/config.js. This is so you can provide your own Service Account details and test your own trained models.
+
+## Done & TODOs
+Implemented so far:
+* get Access Token
+* insert
+* predict
+* get training status
+* revoke access token
+
+TODO:
+* update
+* delete
+* analyze
+* list
