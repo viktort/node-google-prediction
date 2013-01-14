@@ -52,8 +52,8 @@ I assume you have read and have a good understanding of all that is covered in [
       // **Note** is down to you to cache and reuse an access token correctly so ensure you handle HTTP401 in other calls to Client.
     });
 
-    //**Hint:** Look at test/system/testClient for further usage details.
 ```
+**Hint:** Look at test/system/testClient.js for further usage details.
 
 ## Running tests
 Due to the nature of the Google Prediction API, in order to run tests you will need to provide some details withing
