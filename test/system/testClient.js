@@ -90,12 +90,23 @@ TestClient.prototype.insert = function(options) {
 }
 
 TestClient.prototype.revokeToken = function(options) {
+  var self = this;
   client.revokeToken(options, function(err, data, response) {
     if(err) {
       throw new Error(err);
     }
     assert.ok(response.statusCode == '200');
     console.log(data);
+    self.analyze();
+  });
+}
+
+TestClient.prototype.analyze = function() {
+  client.analyze({token: token, id: config.test_modelID}, function(err, data, response) {
+    if(err) {
+      throw new Error(err);
+    }
+    console.log('Data =', data);
     console.log('testClient.js: Tests passed!');
     process.exit(0);
   });
