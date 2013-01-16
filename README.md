@@ -59,6 +59,10 @@ I assume you have read and have a good understanding of all that is covered in [
 Due to the nature of the Google Prediction API, in order to run tests you will need to provide some details withing
 config/config.js. This is so you can provide your own Service Account details and test your own trained models.
 
+When running test/testClient.js it will run a call to Client.js insert() function. **Warning** this will retrain your model.
+I have structured the test such that if you don't provide a test Storage Data Location in config/config.js then this test
+will not run.
+
 ##Creating you .pem file
 **Note:** That when creating a Service Account via the Google Console you will be given a .pk12 file. This library works
 by passing in a .pem file so you can convert it using openssl by running the following command
