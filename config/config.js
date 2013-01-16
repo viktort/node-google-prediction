@@ -27,5 +27,6 @@ module.exports = {
   test_predict_request: {
       //Key value pair to create the request body
   },
+  //******** Leave this blank if you don't want to train your model when running the test/Client.js *********//
   test_storage_data_location: ""
 }
