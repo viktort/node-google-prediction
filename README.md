@@ -75,9 +75,9 @@ Implemented so far:
 * predict
 * get training status
 * revoke access token
+* analyze
 
 TODO:
 * update
 * delete
-* analyze
 * list
