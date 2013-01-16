@@ -2,13 +2,13 @@
     "author": {
         "name": "Viktor Trako",
         "email": "viktor.trako@imagisys.co.uk",
-        "url": "http://holidayextras.co.uk"
+        "url": "www.imagisys.co.uk"
     },
     "keywords": ["google", "prediction", "api", "client", "oauth2", "server to server", "service account", "train models"],
     "name": "node-google-prediction",
     "description": "Node client for Google Prediction API",
     "homepage": "https://github.com/viktort/node-google-prediction",
-    "version": "0.0.3-beta",
+    "version": "0.0.4~beta",
     "repository": {
         "url": ""
     },
