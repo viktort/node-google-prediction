@@ -4,7 +4,7 @@ node-google-prediction
 A node.js client for the Google Prediction API - To be used for Server to Server applications.
 **MIT license**
 
-## v0.0.4~beta
+## v0.0.1
 
 A more extensive implementation to follow.
 
