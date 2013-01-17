@@ -80,8 +80,8 @@ Implemented so far:
 * get training status
 * revoke access token
 * analyze
+* list
 
 TODO:
 * update
 * delete
-* list
