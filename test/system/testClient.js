@@ -21,10 +21,10 @@ TestClient.prototype.getToken = function() {
     if(err) {
       throw new Error(err);
     }
-    console.log('data =', data);
-    console.log('data.access_token =' , data.access_token);
+    console.log('\nGet Token data:\n----------------------------------------------------\n', data);
+    console.log('\ndata.access_token:\n----------------------------------------------------\n' , data.access_token);
     token = data.access_token;
-    console.log('this.token = ', token);
+    console.log('\ntoken:\n----------------------------------------------------\n', token);
     if(!token) {
       throw new Error('No access token found in response ')
     }
@@ -41,8 +41,7 @@ TestClient.prototype.getModelStatus = function(options) {
     if(getErr) {
       throw new Error(getErr);
     }
-    console.log('training status =', getData);
-    console.log('\n---------------------------------\n');
+    console.log('\nTraining status:\n----------------------------------------------------\n', getData);
     console.log('Training status for model id', options.id, ':', getData.trainingStatus,'\n');
     options.body = config.test_predict_request;
     self.predict(options);
@@ -63,7 +62,7 @@ TestClient.prototype.predict = function(options) {
     if(config.test_storage_data_location != '') {
       self.insert({id: options.id, token: options.token, storageDataLocation: config.test_storage_data_location});
     } else {
-      self.revokeToken({token: options.token});
+      self.analyze();
     }
   });
 }
@@ -80,12 +79,35 @@ TestClient.prototype.insert = function(options) {
       if(err) {
         throw new Error(err);
       }
-      console.log('training status =', data);
-      console.log('\n++++++++++++++++++++++++++++++++\n');
+      console.log('\nTraining status\n----------------------------------------------------\n', data);
       console.log('Training status for model id', options.id, ':', data.trainingStatus,'\n');
       assert.ok(data.trainingStatus == 'RUNNING');
-      self.revokeToken({token: options.token});
+      self.analyze();
     });
+  });
+}
+
+TestClient.prototype.analyze = function() {
+  var self = this;
+  client.analyze({token: token, id: config.test_modelID}, function(err, data, response) {
+    if(err) {
+      throw new Error(err);
+    }
+    console.log('\nAnalyze Data:\n----------------------------------------------------\n', data);
+    assert.equal(data.kind, 'prediction#analyze');
+    self.list();
+  });
+}
+
+TestClient.prototype.list = function() {
+  var self = this;
+  client.list({token: token}, function(err, data, response) {
+    if(err) {
+      throw new Error(err);
+    }
+    console.log('Data =', data);
+    assert.equal(data.kind, 'prediction#list');
+    self.revokeToken({token: token})
   });
 }
 
@@ -97,18 +119,7 @@ TestClient.prototype.revokeToken = function(options) {
     }
     assert.ok(response.statusCode == '200');
     console.log(data);
-    self.analyze();
-  });
-}
-
-TestClient.prototype.analyze = function() {
-  client.analyze({token: token, id: config.test_modelID}, function(err, data, response) {
-    if(err) {
-      throw new Error(err);
-    }
-    console.log('Data =', data);
     console.log('testClient.js: Tests passed!');
     process.exit(0);
   });
 }
-
