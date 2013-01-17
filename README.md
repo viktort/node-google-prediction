@@ -81,7 +81,8 @@ Implemented so far:
 * revoke access token
 * analyze
 * list
+* delete
 
 TODO:
 * update
-* delete
+* More tests around delete - user is expected to handle the response http status code correctly within their server app.
