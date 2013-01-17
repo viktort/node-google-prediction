@@ -107,8 +107,25 @@ TestClient.prototype.list = function() {
     }
     console.log('Data =', data);
     assert.equal(data.kind, 'prediction#list');
-    self.revokeToken({token: token})
+    self.delete();
   });
+}
+
+TestClient.prototype.delete = function() {
+  var self = this;
+  if(config.test_delete_modelID) {
+    client.delete({token: token, id: config.test_delete_modelID}, function(err, data, response){
+      if(err) {
+        throw new Error(err);
+      }
+      if(response.statusCode >= 300) {
+        throw new Error('Delete received status code:', response.statusCode);
+      }
+      self.revokeToken({token: token});
+    });
+  } else {
+    self.revokeToken({token: token});
+  }
 }
 
 TestClient.prototype.revokeToken = function(options) {
