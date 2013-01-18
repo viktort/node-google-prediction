@@ -25,7 +25,7 @@ to utilise your service account details to authenticate and use the prediction A
 
 ## Prerequisites
 I assume you have read and have a good understanding of all that is covered in [Google Prediction API](https://developers.google.com/prediction/docs/getting-started)
-[developer guide](https://developers.google.com/prediction/docs/developer-guide). This will help in understanding and using this library successfully.
+ & [developer guide](https://developers.google.com/prediction/docs/developer-guide). This will help in understanding and using this library successfully.
 
 ## Installation
 
