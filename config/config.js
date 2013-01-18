@@ -24,6 +24,7 @@ module.exports = {
   //This is absolute path to your .pem file
   test_pem_file: "",
   test_modelID: "",
+  test_delete_modelID: "",
   test_predict_request: {
       //Key value pair to create the request body
   },

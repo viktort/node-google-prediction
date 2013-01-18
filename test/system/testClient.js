@@ -1,6 +1,7 @@
 var assert = require('assert');
 var Client = require('../../index');
 var config = require('../../config');
+var logger = require('logger');
 var client = null;
 var token = null;
 
@@ -124,6 +125,7 @@ TestClient.prototype.delete = function() {
       self.revokeToken({token: token});
     });
   } else {
+    logger.error('Provide config.test_delete_modelID for delete test to work!')
     self.revokeToken({token: token});
   }
 }
