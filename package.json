@@ -4,11 +4,12 @@
         "email": "viktor.trako@imagisys.co.uk",
         "url": "www.imagisys.co.uk"
     },
-    "keywords": ["google", "prediction", "api", "client", "oauth2", "server to server", "service account", "train models"],
+    "keywords": ["google","prediction","api","client","oauth2","server to server","service account","train models",
+        "signer","key","private key","SHA256","RSA","RSA-SHA256"],
     "name": "node-google-prediction",
     "description": "Node client for Google Prediction API",
     "homepage": "https://github.com/viktort/node-google-prediction",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "repository": {
         "url": ""
     },
