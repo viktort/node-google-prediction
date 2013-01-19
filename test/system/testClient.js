@@ -1,7 +1,7 @@
 var assert = require('assert');
 var Client = require('../../index');
 var config = require('../../config');
-var logger = require('logger');
+var logger = require('feather');
 var client = null;
 var token = null;
 
@@ -17,15 +17,16 @@ function TestClient() {
 }
 
 TestClient.prototype.getToken = function() {
+  console.error('\nRunning get access token test:\n')
   var self = this;
   client.accessTokenRequest(function(err, data) {
     if(err) {
       throw new Error(err);
     }
-    console.log('\nGet Token data:\n----------------------------------------------------\n', data);
-    console.log('\ndata.access_token:\n----------------------------------------------------\n' , data.access_token);
+    console.log('\nGet Token data:\n', data, '\n----------------------------------------------------\n');
+    console.log('\ndata.access_token:\n', data.access_token, '\n----------------------------------------------------\n');
     token = data.access_token;
-    console.log('\ntoken:\n----------------------------------------------------\n', token);
+    console.log('\ntoken:\n', token, '\n----------------------------------------------------\n');
     if(!token) {
       throw new Error('No access token found in response ')
     }
@@ -37,12 +38,13 @@ TestClient.prototype.getToken = function() {
 }
 
 TestClient.prototype.getModelStatus = function(options) {
+  console.error('\nRunning get Trained Model Status test:\n')
   var self = this;
   client.get(options, function(getErr, getData, getResponse) {
     if(getErr) {
       throw new Error(getErr);
     }
-    console.log('\nTraining status:\n----------------------------------------------------\n', getData);
+    console.log('\nTraining status:\n', getData, '\n----------------------------------------------------\n');
     console.log('Training status for model id', options.id, ':', getData.trainingStatus,'\n');
     options.body = config.test_predict_request;
     self.predict(options);
@@ -50,6 +52,7 @@ TestClient.prototype.getModelStatus = function(options) {
 }
 
 TestClient.prototype.predict = function(options) {
+  console.error('\nRunning predict test:\n')
   var self = this;
   client.predict(options, function(err, data, response) {
     if(err) {
@@ -69,6 +72,7 @@ TestClient.prototype.predict = function(options) {
 }
 
 TestClient.prototype.insert = function(options) {
+  console.error('\nRunning insert test:\n')
   var self = this;
   client.insert(options, function(err, data, response) {
     if(err) {
@@ -80,7 +84,7 @@ TestClient.prototype.insert = function(options) {
       if(err) {
         throw new Error(err);
       }
-      console.log('\nTraining status\n----------------------------------------------------\n', data);
+      console.log('\nTraining status\n', data,'\n----------------------------------------------------\n');
       console.log('Training status for model id', options.id, ':', data.trainingStatus,'\n');
       assert.ok(data.trainingStatus == 'RUNNING');
       self.analyze();
@@ -89,18 +93,20 @@ TestClient.prototype.insert = function(options) {
 }
 
 TestClient.prototype.analyze = function() {
+  console.error('\nRunning analyze test:\n')
   var self = this;
   client.analyze({token: token, id: config.test_modelID}, function(err, data, response) {
     if(err) {
       throw new Error(err);
     }
-    console.log('\nAnalyze Data:\n----------------------------------------------------\n', data);
+    console.log('\nAnalyze Data:\n', data, '\n----------------------------------------------------\n');
     assert.equal(data.kind, 'prediction#analyze');
     self.list();
   });
 }
 
 TestClient.prototype.list = function() {
+  console.error('\nRunning list test:\n')
   var self = this;
   client.list({token: token}, function(err, data, response) {
     if(err) {
@@ -113,14 +119,16 @@ TestClient.prototype.list = function() {
 }
 
 TestClient.prototype.delete = function() {
+  console.error('\nRunning delete test:\n')
   var self = this;
   if(config.test_delete_modelID) {
     client.delete({token: token, id: config.test_delete_modelID}, function(err, data, response){
       if(err) {
-        throw new Error(err);
+        throw err;
       }
-      if(response.statusCode >= 300) {
-        throw new Error('Delete received status code:', response.statusCode);
+      logger.info(data);
+      if(response && response.statusCode >= 300) {
+        logger.info('Delete received status code: ' + response.statusCode);
       }
       self.revokeToken({token: token});
     });
@@ -131,6 +139,7 @@ TestClient.prototype.delete = function() {
 }
 
 TestClient.prototype.revokeToken = function(options) {
+  console.error('\nRunning revoke token', token, ':\n');
   var self = this;
   client.revokeToken(options, function(err, data, response) {
     if(err) {
