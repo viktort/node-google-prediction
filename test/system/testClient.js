@@ -10,10 +10,13 @@ process.nextTick(function() {
 });
 
 function TestClient() {
+  var modelInsertFields = 'created,id,kind,modelInfo,modelType,selfLink,storageDataLocation,storagePMMLLocation,storagePMMLModelLocation,trainingComplete,trainingInstances,trainingStatus,utility';
   client = new Client({
     claimSetISS: config.test_jwt_claim_set_iss,
-    path: config.test_pem_file
+    path: config.test_pem_file,
+    modelInsertFields: modelInsertFields
   });
+  assert.equal(config.MODEL_INSERT_FIELDS, modelInsertFields);
 }
 
 TestClient.prototype.getToken = function() {
