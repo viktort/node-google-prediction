@@ -20,14 +20,16 @@ module.exports = {
   // ---------------------------- For testing purposes only ------------------------------------ //
 
   //This is the email address belonging to the service account - place in here for tests to run
-  test_jwt_claim_set_iss: "",
+  test_jwt_claim_set_iss: undefined,
   //This is absolute path to your .pem file
-  test_pem_file: "",
-  test_modelID: "",
-  test_delete_modelID: "",
+  test_pem_file: undefined,
+  test_modelID: undefined,
+  test_delete_modelID: undefined,
   test_predict_request: {
-      //Key value pair to create the request body
+    product_code:undefined,
+    location: undefined
   },
   //******** Leave this blank if you don't want to train your model when running the test/Client.js *********//
-  test_storage_data_location: ""
+  test_storage_data_location: undefined,
+  test_update_data: undefined
 }

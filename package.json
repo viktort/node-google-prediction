@@ -9,7 +9,7 @@
     "name": "node-google-prediction",
     "description": "Node client for Google Prediction API",
     "homepage": "https://github.com/viktort/node-google-prediction",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "repository": {
         "url": ""
     },

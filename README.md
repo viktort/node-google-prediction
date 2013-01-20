@@ -3,7 +3,7 @@ node-google-prediction
 
 A node.js client for the Google Prediction API - To be used for Server to Server applications.
 
-## v0.0.3
+## v0.0.4
 
 ## Integrates with Google Prediction API v1.5
 
@@ -78,20 +78,16 @@ by passing in a .pem file so you can convert it using openssl by running the fol
 ```
 The result will be the key and certificate. You can keep it in one file or split it into two separate files.
 
-## Done & TODOs
-Implemented so far:
-* get Access Token
+## Implemented
+
+* getAccessToken - get Access Token oauth2 authentication with private key!
 * insert
 * predict
-* get training status
-* revoke access token
+* get - training status
+* revoke - access token
 * analyze
 * list
 * delete
-* More tests around delete - user is expected to handle the response http status code correctly within their server app.
-* **Note** Update functionality currently unstable - advise not to use until a later release
-
-TODO:
 * update
 
 ## License
