@@ -133,10 +133,36 @@ TestClient.prototype.delete = function() {
       if(response && response.statusCode >= 300) {
         logger.info('Delete received status code: ' + response.statusCode);
       }
+      self.update();
+    });
+  } else {
+    logger.error('Provide config.test_delete_modelID for delete model test to run!')
+    self.update();
+  }
+}
+
+TestClient.prototype.update = function() {
+  console.error('\nRunning Update test:\n');
+  var self = this;
+  if(config.test_update_data) {
+    var options = {
+      token: token,
+      id: config.test_modelID,
+      updateData: config.test_update_data,
+      label: 'Foo',
+      output: 'Bar'
+    }
+
+    client.update(options, function(err, data, response) {
+      if(err) {
+        throw new Error(err);
+      }
+      console.log('Update data =', data);
+      console.log('HTTP status code =', response.statusCode);
       self.revokeToken({token: token});
     });
   } else {
-    logger.error('Provide config.test_delete_modelID for delete test to work!')
+    logger.error('Provide config.test_delete_modelID for update model test to run!');
     self.revokeToken({token: token});
   }
 }
