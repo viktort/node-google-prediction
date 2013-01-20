@@ -89,6 +89,7 @@ Implemented so far:
 * list
 * delete
 * More tests around delete - user is expected to handle the response http status code correctly within their server app.
+* **Note** Update functionality currently unstable - advise not to use until a later release
 
 TODO:
 * update
