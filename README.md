@@ -3,7 +3,7 @@ node-google-prediction
 
 A node.js client for the Google Prediction API - To be used for Server to Server applications.
 
-## v0.0.4
+## v0.0.5
 
 ## Integrates with Google Prediction API v1.5
 
@@ -45,7 +45,7 @@ I assume you have read and have a good understanding of all that is covered in [
 ```js
     var Client = require('node-google-prediction-api');
     var client = new Client({claimSetISS        : //The Service Account email. Check your Gogole Console -> API Access,
-                             path               : //Absolute path to the service account private key (in .pem format)
+                             pemPath            : //Absolute or relative path to the service account private key (in .pem format - Details below on how to convert from .pk12 to .pem)
                              modelInsertFields  : //Defaults are provided in config/config.js but you may want to provide different ones
                             });
 
