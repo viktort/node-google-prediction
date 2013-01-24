@@ -5,5 +5,6 @@ module.exports = {
         'No storage data location in options! Provide one and try again. ' +
         '\n -------- \n ' +
         'This can be obtained from your Google Cloud Storage manager inside the Console->Google Cloud Storage and follow Google Cloud Storage Manager link!'+
-        '\n ------------------------------------------------------------------------------------------------ \n')
+        '\n ------------------------------------------------------------------------------------------------ \n'),
+  NO_PATH_TO_PEM_FILE_PROVIDED: new Error('No Path to .pem or No JWT Claim Set ISS supplied to Client instance or!')
 }
