@@ -92,4 +92,4 @@ The result will be the key and certificate. You can keep it in one file or split
 
 ## License
 
-Released fully under [MIT license] (http://opensource.org/licenses/MIT)!
+Released fully under [MIT license] (http://viktort.mit-license.org)
