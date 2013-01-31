@@ -1,1 +1,4 @@
-module.exports = require('./config');
+module.exports = {
+  config: require('./config'),
+  errors: require('./errors')
+}
