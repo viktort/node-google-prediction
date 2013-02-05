@@ -43,7 +43,7 @@ I assume you have read and have a good understanding of all that is covered in [
 ## Usage
 
 ```js
-    var Client = require('node-google-prediction-api');
+    var Client = require('node-google-prediction');
     var client = new Client({claimSetISS        : //The Service Account email. Check your Gogole Console -> API Access,
                              pemPath            : //Absolute or relative path to the service account private key (in .pem format - Details below on how to convert from .pk12 to .pem)
                              modelInsertFields  : //Defaults are provided in config/config.js but you may want to provide different ones
