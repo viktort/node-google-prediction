@@ -6,5 +6,6 @@ module.exports = {
         '\n -------- \n ' +
         'This can be obtained from your Google Cloud Storage manager inside the Console->Google Cloud Storage and follow Google Cloud Storage Manager link!'+
         '\n ------------------------------------------------------------------------------------------------ \n'),
-  NO_PATH_TO_PEM_FILE_PROVIDED: new Error('No Path to .pem or No JWT Claim Set ISS supplied to Client instance or!')
+  NO_PATH_TO_PEM_FILE_PROVIDED: new Error('No Path to .pem or No JWT Claim Set ISS supplied to Client instance or!'),
+  NO_UPDATE_DATA_PROVIDED_FOR_UPDATE: new Error('No update data provided when calling prediction api update!')
 }
