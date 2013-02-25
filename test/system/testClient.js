@@ -1,6 +1,6 @@
 var assert = require('assert');
 var Client = require('../../index');
-var config = require('../../config');
+var config = require('../../config').config;
 var logger = require('feather');
 var client = null;
 var token = null;
@@ -66,7 +66,7 @@ TestClient.prototype.predict = function(options) {
 
     // Ideally you will not run this every time you run tests as this will retrain the model and this can take some time to complete.
     // You can still query a trained model as the data is being trained!
-    if(config.test_storage_data_location != '') {
+    if(config.test_storage_data_location) {
       self.insert({id: options.id, token: options.token, storageDataLocation: config.test_storage_data_location});
     } else {
       self.analyze();
