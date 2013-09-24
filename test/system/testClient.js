@@ -155,7 +155,7 @@ TestClient.prototype.update = function() {
 
     client.update(options, function(err, data, response) {
       if(err) {
-        throw new Error(err);
+        throw err;
       }
       console.log('Update data =', data);
       console.log('HTTP status code =', response.statusCode);
