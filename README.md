@@ -1,6 +1,8 @@
 node-google-prediction
 ======================
 
+[![Code Climate](https://codeclimate.com/github/viktort/node-google-prediction.png)](https://codeclimate.com/github/viktort/node-google-prediction)
+
 A node.js client for the Google Prediction API - To be used for Server to Server applications.
 
 ## v0.0.5
