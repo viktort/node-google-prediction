@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Node-google-prediction by viktort</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Node-google-prediction</h1>
+          <h2>A node.js client for the Google Prediction API</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/viktort/node-google-prediction/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/viktort/node-google-prediction/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/viktort/node-google-prediction" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a name="node-google-prediction" class="anchor" href="#node-google-prediction"><span class="octicon octicon-link"></span></a>node-google-prediction</h1>
+
+<p><a href="https://codeclimate.com/github/viktort/node-google-prediction"><img src="https://codeclimate.com/github/viktort/node-google-prediction.png" alt="Code Climate"></a></p>
+
+<p>A node.js client for the Google Prediction API - To be used for Server to Server applications.</p>
+
+<h2>
+<a name="v005" class="anchor" href="#v005"><span class="octicon octicon-link"></span></a>v0.0.5</h2>
+
+<h2>
+<a name="integrates-with-google-prediction-api-v15" class="anchor" href="#integrates-with-google-prediction-api-v15"><span class="octicon octicon-link"></span></a>Integrates with Google Prediction API v1.5</h2>
+
+<h2>
+<a name="implemented" class="anchor" href="#implemented"><span class="octicon octicon-link"></span></a>Implemented</h2>
+
+<ul>
+<li>getAccessToken - get Access Token oauth2 authentication with private key!</li>
+<li>insert</li>
+<li>predict</li>
+<li>get - training status</li>
+<li>revoke - access token</li>
+<li>analyze</li>
+<li>list</li>
+<li>delete</li>
+<li>update</li>
+</ul><h2>
+<a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h2>
+
+<p>This is a <a href="http://nodejs.org/">node.js</a> client library that abstracts the Google Prediction API integration complexities,
+and allows you to get up and running quickly and start using the api to your business benefit.</p>
+
+<p>This client makes it easy to authenticate using OAuth2 by using the private key given to you by Google when you created
+your <a href="https://developers.google.com/accounts/docs/OAuth2ServiceAccount#libraries">service account</a>.</p>
+
+<p>Google at present do not provide their own node.js client which was the motivation for creating this client.</p>
+
+<p>So if you want to create a web service application, this is a perfect library to get you started as this will allow you
+to utilise your service account details to authenticate and use the prediction API.</p>
+
+<h2>
+<a name="prerequisites" class="anchor" href="#prerequisites"><span class="octicon octicon-link"></span></a>Prerequisites</h2>
+
+<p>I assume you have read and have a good understanding of all that is covered in <a href="https://developers.google.com/prediction/docs/getting-started">Google Prediction API</a>
+ &amp; <a href="https://developers.google.com/prediction/docs/developer-guide">developer guide</a>. This will help in understanding and using this library successfully.</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p><code>npm install node-google-prediction</code></p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<div class="highlight highlight-js"><pre>    <span class="kd">var</span> <span class="nx">Client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-google-prediction'</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">({</span><span class="nx">claimSetISS</span>        <span class="o">:</span> <span class="c1">//The Service Account email. Check your Gogole Console -&gt; API Access,</span>
+                             <span class="nx">pemPath</span>            <span class="o">:</span> <span class="c1">//Absolute or relative path to the service account private key (in .pem format - Details below on how to convert from .pk12 to .pem)</span>
+                             <span class="nx">modelInsertFields</span>  <span class="o">:</span> <span class="c1">//Defaults are provided in config/config.js but you may want to provide different ones</span>
+                            <span class="p">});</span>
+
+    <span class="p">...</span>
+    <span class="nx">SomeModule</span><span class="p">.</span><span class="nx">getToken</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="nx">client</span><span class="p">.</span><span class="nx">accessTokenRequest</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">cb</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">//You may want to handle response.statusCode if http 401 Unauthorised is received!</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">response</span> <span class="o">&amp;&amp;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span> <span class="o">&amp;&amp;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span> <span class="o">&gt;</span> <span class="mi">399</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">cb</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">'HTTP status code: '</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span><span class="p">));</span>
+        <span class="p">}</span>
+
+        <span class="kd">var</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">access_token</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nx">cb</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">token</span><span class="p">);</span>
+
+        <span class="c1">// Cache your token as it is valid for 1 hour and you can reuse. Only make a fresh token request if HTTP 401 is received.</span>
+        <span class="c1">// **Note** is down to you to cache and reuse an access token correctly so ensure you handle HTTP401 in other calls to Client.</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+
+</pre></div>
+
+<p><strong>Hint:</strong> Look at test/system/testClient.js for further usage/implementation details.</p>
+
+<h2>
+<a name="running-tests" class="anchor" href="#running-tests"><span class="octicon octicon-link"></span></a>Running tests</h2>
+
+<p>Due to the nature of the Google Prediction API, in order to run tests you will need to provide some details withing
+config/config.js. This is so you can provide your own Service Account details and test your own trained models.</p>
+
+<p>When running test/testClient.js it will run a call to Client.js insert() function. <strong>Warning</strong> this will retrain your model.
+I have structured the test such that if you don't provide a test Storage Data Location in config/config.js then this test
+will not run.</p>
+
+<h2>
+<a name="creating-you-pem-file" class="anchor" href="#creating-you-pem-file"><span class="octicon octicon-link"></span></a>Creating you .pem file</h2>
+
+<p><strong>Note:</strong> That when creating a Service Account via the Google Console you will be given a .pk12 file. This library works
+by passing in a .pem file so you can convert it using openssl by running the following command</p>
+
+<div class="highlight highlight-sh"><pre>    openssl pkcs12 -in originalKey.p12 -out convertedKey.pem -nodes -clcerts
+</pre></div>
+
+<p>The result will be the key and certificate. You can keep it in one file or split it into two separate files.</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Released fully under <a href="http://viktort.mit-license.org">MIT license</a></p>
+        </section>
+
+        <footer>
+          Node-google-prediction is maintained by <a href="https://github.com/viktort">viktort</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
